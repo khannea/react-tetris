@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald:600&display=swap");
+
+$darkpurple: #18131d;
+$purple: #4f445a;
+$lightpurple: #7d7883;
+
+$cellWidth: 30px;
+$cellHeight: 30px;
+
+body {
+  background: #18131d;
+}
+
+h1 {
+  color: $purple;
+  font-weight: bold;
+  font-size: 100px;
+  display: inline-block;
+  margin: 0;
+}
+#wrapper_tetris {
+  text-align: center;
+  padding-top: 100px;
+}
+
+button {
+  background: $lightpurple;
+  border: 0;
+  color: $darkpurple;
+  font-weight: bold;
+  width: 330px;
+  padding: 10px 0;
+  display: block;
+  margin: 0 auto 10px auto;
+  font-size: 30px;
+}
+
+.grid span {
+  width: 30px;
+  height: 30px;
+  display: block;
+  float: left;
+}
+
+.grid span.first {
+  clear: both;
+}
+
+.grid span.color0 {
+  // background: rgb(129, 2, 119);
+  color: white;
+}
+
+.grid span.color1 {
+  background: red;
+  color: white;
+}
+
+.grid span.color2 {
+  background: rgb(34, 255, 34);
+  color: white;
+}
+
+.grid span.color3 {
+  background: blue;
+  color: white;
+}
+
+.grid span.color4 {
+  background: rgb(224, 219, 5);
+  color: white;
+}
+
+.grid span.color5 {
+  background: purple;
+  color: white;
+}
+
+.grid span.color6 {
+  background: rgb(33, 160, 219);
+  color: white;
+}
+
+.grid span.color7 {
+  background: rgb(255, 123, 0);
+  color: white;
+}
+
+.grid span.projection {
+  background: rgb(29, 22, 28);
+  color: white;
+}
+
+//GRID DESIGN
+#wrapper_grid {
+  position: relative;
+  display: inline-block;
+}
+
+#grid {
+  position: relative;
+  display: inline-block;
+  background: $purple;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: red;
+    z-index: -1;
+    box-shadow: 0 0 15px 2px #040205;
+    border-top-left-radius: 0%;
+    border-top-left-radius: 0%;
+  }
+  span {
+    width: $cellWidth;
+    height: $cellHeight;
+    position: relative;
+    border: 1px solid #524f55;
+    // &:before {
+    //   content: "";
+    //   position: absolute;
+    //   width: 4px;
+    //   height: 4px;
+    //   left: 50%;
+    //   top: 50%;
+    //   transform: translateX(-50%) translateY(-50%);
+    //   background: white;
+    //   border-radius: 50%;
+    // }
+  }
+}
+
+.ui-text {
+  div:first-child {
+    margin-bottom: 30px;
+  }
+  span {
+    font-family: "Oswald", sans-serif;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .title {
+    color: $purple;
+  }
+
+  .value {
+    color: $lightpurple;
+  }
+}
+
+#level_and_line {
+  position: absolute;
+  right: calc(100% + 20px);
+  bottom: 5px;
+  span {
+    text-align: right;
+    display: block;
+  }
+}
+
+#time_and_score {
+  position: absolute;
+  left: calc(100% + 20px);
+  bottom: 5px;
+  span {
+    text-align: left;
+    display: block;
+  }
+}
+
+#next_piece_wrapper {
+  position: absolute;
+  left: calc(100% + 20px);
+  top: 0px;
+  width: 6 * $cellWidth;
+  height: 4.5 * $cellHeight;
+}
+
+#next_piece {
+  position: relative;
+  left: 20%;
+  span {
+    display: block;
+    float: left;
+    position: relative;
+    width: $cellWidth;
+    height: $cellHeight;
+
+    &[class*="color"] {
+      position: relative;
+      &:before {
+        content: "";
+        position: absolute;
+        width: calc(#{$cellWidth} + 20px);
+        height: calc(#{$cellHeight} + 20px);
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        background: $lightpurple;
+        z-index: -1;
+      }
+    }
+  }
+}
