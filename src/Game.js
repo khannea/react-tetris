@@ -4,7 +4,7 @@ import pieceCollection from "./pieceCollection";
 import NextPiece from "./NextPiece";
 import LevelAndLine from "./LevelAndLine";
 import TimeAndScore from "./TimeAndScore";
-
+import keyChoosen from "./keyChoosen";
 class Game extends Component {
   state = {
     grid: null,
@@ -16,40 +16,27 @@ class Game extends Component {
     nextPieceIndex: null,
     lostGame: false,
     numberLine: 0,
-    numberLineToLevelUp: 5
+    numberLineToLevelUp: 5,
+    options: {
+      choosenKeys: {
+        bottom: 40,
+        left: 37,
+        right: 39,
+        rotateHour: 88,
+        rotateAntiHour: 89
+      }
+    }
   };
 
   componentDidMount() {
-    this.initGame();
+    let options = JSON.parse(localStorage.getItem("tetris_options"));
+    if (options === null || options === "") {
+      options = keyChoosen;
+    }
 
-    let key_pressed = [];
-    let multiple_key = false;
-
-    window.addEventListener("keyup", e => {
-      if (key_pressed.length < 2) {
-        multiple_key = false;
-      }
-      let index = key_pressed.indexOf(e.keyCode);
-      if (index > -1) {
-        key_pressed.splice(index, 1);
-      }
-    });
-
-    window.addEventListener("keydown", e => {
-      if (key_pressed.indexOf(e.keyCode) === -1) {
-        key_pressed.push(e.keyCode);
-      }
-      if (key_pressed.length > 1) {
-        key_pressed.forEach((keyCode, index) => {
-          if (multiple_key === false && index === 0) {
-            multiple_key = true;
-          } else {
-            this.executeKeyCode(keyCode);
-          }
-        });
-      } else {
-        this.executeKeyCode(key_pressed[0]);
-      }
+    this.setState({ options }, () => {
+      //option rdy. Init Game
+      this.initGame();
     });
   }
 
@@ -60,19 +47,19 @@ class Game extends Component {
 
   executeKeyCode = keyCode => {
     switch (keyCode) {
-      case 39:
+      case this.state.options.choosenKeys["right"]:
         this.pieceMoveX(1);
         break;
-      case 37:
+      case this.state.options.choosenKeys["left"]:
         this.pieceMoveX(-1);
         break;
-      case 40:
+      case this.state.options.choosenKeys["bottom"]:
         this.pieceMoveY(1);
         break;
-      case 65:
+      case this.state.options.choosenKeys["rotateAntiHour"]:
         this.pieceRotate(-1);
         break;
-      case 68:
+      case this.state.options.choosenKeys["rotateHour"]:
         this.pieceRotate(1);
         break;
       default:
@@ -80,9 +67,57 @@ class Game extends Component {
     }
   };
 
+  keyupActions = e => {
+    if (this.key_pressed.length < 2) {
+      this.multiple_key = false;
+    }
+    let index = this.key_pressed.indexOf(e.keyCode);
+    if (index > -1) {
+      this.key_pressed.splice(index, 1);
+    }
+  };
+
+  keydownActions = e => {
+    if (this.key_pressed.indexOf(e.keyCode) === -1) {
+      this.key_pressed.push(e.keyCode);
+    }
+    if (this.key_pressed.length > 1) {
+      this.key_pressed.forEach((keyCode, index) => {
+        if (this.multiple_key === false && index === 0) {
+          this.multiple_key = true;
+        } else {
+          this.executeKeyCode(keyCode);
+        }
+      });
+    } else {
+      this.executeKeyCode(this.key_pressed[0]);
+    }
+  };
+
   initGame = () => {
+    this.baseIntervalTimer = 1000;
+    this.globalTimer = 0;
+
+    setInterval(() => {
+      this.globalTimer++;
+    }, 1000);
+
+    this.key_pressed = [];
+    this.multiple_key = false;
+
+    window.addEventListener("keyup", this.keyupActions);
+
+    window.addEventListener("keydown", this.keydownActions);
+
     this.setState(
-      { grid: this.buildGrid(), nextPieceIndex: this.generateNextPiece() },
+      {
+        grid: this.buildGrid(),
+        nextPieceIndex: this.generateNextPiece(),
+        numberLine: 0,
+        lvl: 1,
+        lostGame: false,
+        score: 0
+      },
       () => {
         this.generatePiece();
 
@@ -95,6 +130,9 @@ class Game extends Component {
     clearInterval(this.timer);
 
     this.setState({ lostGame: true });
+
+    window.removeEventListener("keyup", this.keyupActions);
+    window.removeEventListener("keydown", this.keydownActions);
   };
 
   //TIMER FONCTION
@@ -107,9 +145,9 @@ class Game extends Component {
   convertLvlToTime = () => {
     let lvl = this.state.lvl;
     if (lvl === 0) {
-      return 1000;
+      return this.baseIntervalTimer;
     } else {
-      return 1000 * Math.pow(65 / 100, lvl);
+      return this.baseIntervalTimer * Math.pow(65 / 100, lvl);
     }
   };
 
@@ -363,10 +401,51 @@ class Game extends Component {
     return line;
   }
 
+  toHHMMSS = function(time) {
+    var sec_num = time;
+
+    var minutes = Math.floor(sec_num / 60);
+    var seconds = sec_num - minutes * 60;
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    return minutes + ":" + seconds;
+  };
+
   render() {
+    if (this.state.lostGame) {
+      return (
+        <div id="wrapper_lost_game">
+          <h1>GAME OVER</h1>
+          <div className="ui-text">
+            <span className="ui-text">Score : {this.state.score}</span>
+          </div>
+          <div className="ui-text">
+            {" "}
+            <span className="title">
+              Time : {this.toHHMMSS(this.globalTimer)}
+            </span>
+          </div>
+
+          <div className="wrapper_button">
+            <button onClick={() => this.initGame()}>Play again</button>
+            <button onClick={() => this.props.actions.launchMenu()}>
+              Back
+            </button>
+          </div>
+        </div>
+      );
+    }
     return (
       <div id="wrapper_grid">
-        <TimeAndScore time={this.timer / 1000} score={this.state.score} />
+        <TimeAndScore
+          time={this.toHHMMSS(this.globalTimer)}
+          score={this.state.score}
+        />
         <LevelAndLine
           lvl={this.state.lvl}
           line={this.state.numberLine}
@@ -378,9 +457,6 @@ class Game extends Component {
 
         {this.state.grid !== null && (
           <Grid grid={this.state.grid} piece={this.state.piece} />
-        )}
-        {this.state.lostGame === true && (
-          <button onClick={() => this.props.actions.launchMenu()}>Back</button>
         )}
       </div>
     );

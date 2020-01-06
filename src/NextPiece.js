@@ -4,8 +4,8 @@ import pieceCollection from "./pieceCollection";
 function NextPiece({ index }) {
   let grid = pieceCollection[index];
   return (
-    <div id="next_piece_wrapper" class="ui-text">
-      <span class="title">NEXT PIECE</span>
+    <div id="next_piece_wrapper" className="ui-text">
+      <span className="title">NEXT PIECE</span>
       <div id="next_piece" className="grid">
         {grid.map((line, y) => {
           return line.map((col, x) => {

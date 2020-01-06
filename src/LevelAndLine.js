@@ -2,14 +2,14 @@ import React from "react";
 
 function LevelAndLine({ lvl, line, lineToComplete }) {
   return (
-    <div id="level_and_line" class="ui-text">
+    <div id="level_and_line" className="ui-text">
       <div className="lvl">
-        <span class="title">LEVEL </span>
-        <span class="value">{lvl}</span>
+        <span className="title">LEVEL </span>
+        <span className="value">{lvl}</span>
       </div>
       <div className="line">
-        <span class="title">LINE </span>
-        <span class="value">
+        <span className="title">LINE </span>
+        <span className="value">
           {line} / {lineToComplete}
         </span>
       </div>
