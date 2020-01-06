@@ -15,6 +15,7 @@ $smallUiFontSize: 30px;
 
 body {
   background: #18131d;
+  min-width: 410px;
 }
 
 h1 {
@@ -44,7 +45,7 @@ button {
 .grid span {
   width: 30px;
   height: 30px;
-  display: block;
+
   float: left;
 }
 
@@ -99,7 +100,7 @@ button {
 
 // MEDIA QUERY
 
-@media screen and (min-width: 2160px) {
+@media screen and (min-width: 920px) {
   //GRID DESIGN
   #wrapper_grid {
     position: relative;
@@ -216,11 +217,12 @@ button {
   }
 }
 
-@media screen and (max-width: 2160px) {
+@media screen and (max-width: 920px) {
   //GRID DESIGN
   #wrapper_grid {
     position: relative;
     display: inline-block;
+    // margin: 100px;
   }
 
   #grid {
