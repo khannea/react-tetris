@@ -53,6 +53,11 @@ class Game extends Component {
     });
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("keyup", this.keyupActions);
+    window.removeEventListener("keydown", this.keydownActions);
+  }
+
   executeKeyCode = keyCode => {
     switch (keyCode) {
       case 39:
