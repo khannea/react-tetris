@@ -7,6 +7,12 @@ $lightpurple: #7d7883;
 $cellWidth: 30px;
 $cellHeight: 30px;
 
+$smallCellWidth: 20px;
+$smallCellHeight: 20px;
+
+$uiFontSize: 40px;
+$smallUiFontSize: 30px;
+
 body {
   background: #18131d;
 }
@@ -91,117 +97,235 @@ button {
   color: white;
 }
 
-//GRID DESIGN
-#wrapper_grid {
-  position: relative;
-  display: inline-block;
-}
-
-#grid {
-  position: relative;
-  display: inline-block;
-  background: $purple;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: red;
-    z-index: -1;
-    box-shadow: 0 0 15px 2px #040205;
-    border-top-left-radius: 0%;
-    border-top-left-radius: 0%;
-  }
-  span {
-    width: $cellWidth;
-    height: $cellHeight;
+@media screen and (min-width: 780px) {
+  //GRID DESIGN
+  #wrapper_grid {
     position: relative;
-    border: 1px solid #524f55;
-    // &:before {
-    //   content: "";
-    //   position: absolute;
-    //   width: 4px;
-    //   height: 4px;
-    //   left: 50%;
-    //   top: 50%;
-    //   transform: translateX(-50%) translateY(-50%);
-    //   background: white;
-    //   border-radius: 50%;
-    // }
-  }
-}
-
-.ui-text {
-  div:first-child {
-    margin-bottom: 30px;
-  }
-  span {
-    font-family: "Oswald", sans-serif;
-    font-size: 40px;
-    font-weight: 500;
-    line-height: 1;
-  }
-  .title {
-    color: $purple;
+    display: inline-block;
   }
 
-  .value {
-    color: $lightpurple;
-  }
-}
-
-#level_and_line {
-  position: absolute;
-  right: calc(100% + 20px);
-  bottom: 5px;
-  span {
-    text-align: right;
-    display: block;
-  }
-}
-
-#time_and_score {
-  position: absolute;
-  left: calc(100% + 20px);
-  bottom: 5px;
-  span {
-    text-align: left;
-    display: block;
-  }
-}
-
-#next_piece_wrapper {
-  position: absolute;
-  left: calc(100% + 20px);
-  top: 0px;
-  width: 6 * $cellWidth;
-  height: 4.5 * $cellHeight;
-}
-
-#next_piece {
-  position: relative;
-  left: 20%;
-  span {
-    display: block;
-    float: left;
+  #grid {
     position: relative;
-    width: $cellWidth;
-    height: $cellHeight;
-
-    &[class*="color"] {
+    display: inline-block;
+    background: $purple;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      box-shadow: 0 0 15px 2px #040205;
+      border-top-left-radius: 0%;
+      border-top-left-radius: 0%;
+    }
+    span {
+      width: $cellWidth;
+      height: $cellHeight;
       position: relative;
-      &:before {
-        content: "";
-        position: absolute;
-        width: calc(#{$cellWidth} + 20px);
-        height: calc(#{$cellHeight} + 20px);
-        left: 50%;
-        top: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        background: $lightpurple;
-        z-index: -1;
+      border: 1px solid #524f55;
+      // &:before {
+      //   content: "";
+      //   position: absolute;
+      //   width: 4px;
+      //   height: 4px;
+      //   left: 50%;
+      //   top: 50%;
+      //   transform: translateX(-50%) translateY(-50%);
+      //   background: white;
+      //   border-radius: 50%;
+      // }
+    }
+  }
+
+  .ui-text {
+    div:first-child {
+      margin-bottom: 30px;
+    }
+    span {
+      font-family: "Oswald", sans-serif;
+      font-size: $uiFontSize;
+      font-weight: 500;
+      line-height: 1;
+    }
+    .title {
+      color: $purple;
+    }
+
+    .value {
+      color: $lightpurple;
+    }
+  }
+
+  #level_and_line {
+    position: absolute;
+    right: calc(100% + 20px);
+    bottom: 5px;
+    span {
+      text-align: right;
+      display: block;
+    }
+  }
+
+  #time_and_score {
+    position: absolute;
+    left: calc(100% + 20px);
+    bottom: 5px;
+    span {
+      text-align: left;
+      display: block;
+    }
+  }
+
+  #next_piece_wrapper {
+    position: absolute;
+    left: calc(100% + 20px);
+    top: 0px;
+    width: 6 * $cellWidth;
+    height: 4.5 * $cellHeight;
+  }
+
+  #next_piece {
+    position: relative;
+    left: 20%;
+    span {
+      display: block;
+      float: left;
+      position: relative;
+      width: $cellWidth;
+      height: $cellHeight;
+
+      &[class*="color"] {
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          width: calc(#{$cellWidth} + 20px);
+          height: calc(#{$cellHeight} + 20px);
+          left: 50%;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          background: $lightpurple;
+          z-index: -1;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+  //GRID DESIGN
+  #wrapper_grid {
+    position: relative;
+    display: inline-block;
+  }
+
+  #grid {
+    position: relative;
+    display: inline-block;
+    background: $purple;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      box-shadow: 0 0 15px 2px #040205;
+      border-top-left-radius: 0%;
+      border-top-left-radius: 0%;
+    }
+    span {
+      width: $smallCellWidth;
+      height: $smallCellHeight;
+      position: relative;
+      border: 1px solid #524f55;
+      // &:before {
+      //   content: "";
+      //   position: absolute;
+      //   width: 4px;
+      //   height: 4px;
+      //   left: 50%;
+      //   top: 50%;
+      //   transform: translateX(-50%) translateY(-50%);
+      //   background: white;
+      //   border-radius: 50%;
+      // }
+    }
+  }
+
+  .ui-text {
+    div:first-child {
+      margin-bottom: 30px;
+    }
+    span {
+      font-family: "Oswald", sans-serif;
+      font-size: $smallUiFontSize;
+      font-weight: 500;
+      line-height: 1;
+    }
+    .title {
+      color: $purple;
+    }
+
+    .value {
+      color: $lightpurple;
+    }
+  }
+
+  #level_and_line {
+    position: absolute;
+    right: calc(100% + 20px);
+    bottom: 5px;
+    span {
+      text-align: right;
+      display: block;
+    }
+  }
+
+  #time_and_score {
+    position: absolute;
+    left: calc(100% + 20px);
+    bottom: 5px;
+    span {
+      text-align: left;
+      display: block;
+    }
+  }
+
+  #next_piece_wrapper {
+    position: absolute;
+    left: calc(100% + 20px);
+    top: 0px;
+    width: 7 * $smallCellWidth;
+    height: 4.5 * $smallCellHeight;
+  }
+
+  #next_piece {
+    position: relative;
+    left: 20%;
+    span {
+      display: block;
+      float: left;
+      position: relative;
+      width: $smallCellWidth;
+      height: $smallCellHeight;
+
+      &[class*="color"] {
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          width: calc(#{$smallCellWidth} + 15px);
+          height: calc(#{$smallCellHeight} + 15px);
+          left: 50%;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          background: $lightpurple;
+          z-index: -1;
+        }
       }
     }
   }
