@@ -97,7 +97,9 @@ button {
   color: white;
 }
 
-@media screen and (min-width: 1090px) {
+// MEDIA QUERY
+
+@media screen and (min-width: 1500px) {
   //GRID DESIGN
   #wrapper_grid {
     position: relative;
@@ -214,7 +216,7 @@ button {
   }
 }
 
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 1500px) {
   //GRID DESIGN
   #wrapper_grid {
     position: relative;
