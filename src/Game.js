@@ -25,15 +25,7 @@ class Game extends Component {
     lostGame: false,
     numberLine: 0,
     numberLineToLevelUp: 5,
-    options: {
-      choosenKeys: {
-        bottom: 40,
-        left: 37,
-        right: 39,
-        rotateHour: 88,
-        rotateAntiHour: 89
-      }
-    }
+    options: null
   };
 
   componentDidMount() {
@@ -451,7 +443,7 @@ class Game extends Component {
     return (
       <div id="wrapper_grid">
         <MobileView>
-          <h1> MOBMOBMOB MOBILE</h1>
+          <button onClick={() => this.executeKeyCode(88)}></button>
         </MobileView>
         <TimeAndScore
           time={this.toHHMMSS(this.globalTimer)}
