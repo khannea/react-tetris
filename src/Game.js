@@ -97,7 +97,7 @@ class Game extends Component {
     }
   };
 
-  touchdownActions = e => {
+  touchstartActions = e => {
     if (this.key_pressed.length > 1) {
       this.key_pressed.forEach((keyCode, index) => {
         if (this.multiple_key === false && index === 0) {
@@ -111,7 +111,7 @@ class Game extends Component {
     }
   };
 
-  touchupActions = e => {
+  touchendActions = e => {
     clearInterval(this.touchingScreen);
     if (this.key_pressed.length > 0) {
       this.key_pressed = [];
@@ -130,13 +130,14 @@ class Game extends Component {
     this.key_pressed = [];
     this.multiple_key = false;
 
-    window.addEventListener("keyup", this.keyupActions);
     window.addEventListener("keydown", this.keydownActions);
-    window.addEventListener("touchstart", this.touchupActions);
-    window.addEventListener("touchstop", () => {
+    window.addEventListener("keyup", this.keyupActions);
+
+    window.addEventListener("touchstart", () => {
       this.touchdownActions();
-      this.touchingScreen = setInterval(this.touchdownActions, 50);
+      this.touchingScreen = setInterval(this.touchstartActions, 50);
     });
+    window.addEventListener("touchend", this.touchendActions);
 
     this.setState(
       {
@@ -492,7 +493,7 @@ class Game extends Component {
           <div id="mobile_key">
             <button
               id="mobileRotateHour"
-              onMouseDown={e => {
+              onTouchStart={e => {
                 this.key_pressed.push(
                   this.state.options.choosenKeys.rotateHour
                 );
@@ -500,7 +501,7 @@ class Game extends Component {
             ></button>
             <button
               id="mobileBottom"
-              onMouseDown={e => {
+              onTouchStart={e => {
                 this.key_pressed.push(this.state.options.choosenKeys.bottom);
               }}
             ></button>
