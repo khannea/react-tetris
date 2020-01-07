@@ -46,6 +46,7 @@ class Game extends Component {
   }
 
   executeKeyCode = keyCode => {
+    console.log("j'execute");
     switch (keyCode) {
       case this.state.options.choosenKeys["right"]:
         this.pieceMoveX(1);
@@ -94,9 +95,31 @@ class Game extends Component {
     }
   };
 
+  touchdownActions = e => {
+    if (this.key_pressed.length > 1) {
+      this.key_pressed.forEach((keyCode, index) => {
+        if (this.multiple_key === false && index === 0) {
+          this.multiple_key = true;
+        } else {
+          this.executeKeyCode(keyCode);
+        }
+      });
+    } else {
+      this.executeKeyCode(this.key_pressed[0]);
+    }
+  };
+
+  touchupActions = e => {
+    clearInterval(this.touchingScreen);
+    if (this.key_pressed.length > 0) {
+      this.key_pressed = [];
+    }
+  };
+
   initGame = () => {
     this.baseIntervalTimer = 1000;
     this.globalTimer = 0;
+    this.touchingScreen = false;
 
     setInterval(() => {
       this.globalTimer++;
@@ -106,8 +129,12 @@ class Game extends Component {
     this.multiple_key = false;
 
     window.addEventListener("keyup", this.keyupActions);
-
     window.addEventListener("keydown", this.keydownActions);
+    window.addEventListener("mousedown", () => {
+      this.touchdownActions();
+      this.touchingScreen = setInterval(this.touchdownActions, 50);
+    });
+    window.addEventListener("mouseup", this.touchupActions);
 
     this.setState(
       {
@@ -137,9 +164,9 @@ class Game extends Component {
 
   //TIMER FONCTION
   launchTimer = () => {
-    this.timer = setInterval(() => {
-      this.pieceMoveY(1);
-    }, this.convertLvlToTime());
+    // this.timer = setInterval(() => {
+    //   this.pieceMoveY(1);
+    // }, this.convertLvlToTime());
   };
 
   convertLvlToTime = () => {
@@ -442,9 +469,6 @@ class Game extends Component {
     }
     return (
       <div id="wrapper_grid">
-        <MobileView>
-          <button onClick={() => this.executeKeyCode(88)}></button>
-        </MobileView>
         <TimeAndScore
           time={this.toHHMMSS(this.globalTimer)}
           score={this.state.score}
@@ -461,6 +485,25 @@ class Game extends Component {
         {this.state.grid !== null && (
           <Grid grid={this.state.grid} piece={this.state.piece} />
         )}
+
+        <MobileView>
+          <div id="mobile_key">
+            <button
+              id="mobileRotateHour"
+              onMouseDown={e => {
+                this.key_pressed.push(
+                  this.state.options.choosenKeys.rotateHour
+                );
+              }}
+            ></button>
+            <button
+              id="mobileBottom"
+              onMouseDown={e => {
+                this.key_pressed.push(this.state.options.choosenKeys.bottom);
+              }}
+            ></button>
+          </div>
+        </MobileView>
       </div>
     );
   }

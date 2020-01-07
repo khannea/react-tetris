@@ -34,7 +34,7 @@ h1 {
   display: inline-block;
 }
 
-button {
+#menu button {
   background: $lightpurple;
   border: 0;
   color: $darkpurple;
@@ -44,6 +44,54 @@ button {
   display: block;
   margin: 0 auto 10px auto;
   font-size: 30px;
+}
+
+#mobile_key {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  transform: translateY(100%);
+  button {
+    border: 0;
+    background: $lightpurple;
+    font-weight: bold;
+    width: 60px;
+    height: 60px;
+    padding: 10px 0;
+    display: block;
+    margin: 0 auto 10px auto;
+    font-size: 30px;
+    box-shadow: 0 0 15px 5px #040205;
+  }
+  #mobileRotateHour {
+    position: relative;
+    &:before {
+      content: "↻";
+      color: $darkpurple;
+      position: absolute;
+      font-size: 60px;
+      width: 60px;
+      height: 60px;
+      left: 50%;
+      top: 25%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+  #mobileBottom {
+    position: relative;
+    &:before {
+      content: "↓";
+      color: $darkpurple;
+      position: absolute;
+      font-size: 60px;
+      width: 60px;
+      height: 60px;
+      left: 50%;
+      top: 25%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
 }
 
 .grid span {
