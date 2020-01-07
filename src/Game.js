@@ -134,7 +134,7 @@ class Game extends Component {
     window.addEventListener("keyup", this.keyupActions);
 
     window.addEventListener("touchstart", () => {
-      this.touchdownActions();
+      this.touchstartActions();
       this.touchingScreen = setInterval(this.touchstartActions, 50);
     });
     window.addEventListener("touchend", this.touchendActions);
@@ -489,24 +489,22 @@ class Game extends Component {
           <Grid grid={this.state.grid} piece={this.state.piece} />
         )}
 
-        <MobileView>
-          <div id="mobile_key">
-            <button
-              id="mobileRotateHour"
-              onClick={e => {
-                this.key_pressed.push(
-                  this.state.options.choosenKeys.rotateHour
-                );
-              }}
-            ></button>
-            <button
-              id="mobileBottom"
-              onClick={e => {
-                this.key_pressed.push(this.state.options.choosenKeys.bottom);
-              }}
-            ></button>
-          </div>
-        </MobileView>
+        {/* <MobileView> */}
+        <div id="mobile_key">
+          <button
+            id="mobileRotateHour"
+            onTouchStart={e => {
+              this.key_pressed.push(this.state.options.choosenKeys.rotateHour);
+            }}
+          ></button>
+          <button
+            id="mobileBottom"
+            onTouchStart={e => {
+              this.key_pressed.push(this.state.options.choosenKeys.bottom);
+            }}
+          ></button>
+        </div>
+        {/* </MobileView> */}
       </div>
     );
   }
