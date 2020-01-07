@@ -43,8 +43,8 @@ class Game extends Component {
   componentWillUnmount() {
     window.removeEventListener("keyup", this.keyupActions);
     window.removeEventListener("keydown", this.keydownActions);
-    window.removeEventListener("touchup", this.keyupActions);
-    window.removeEventListener("touchdown", this.keydownActions);
+    window.removeEventListener("touchstart", this.keyupActions);
+    window.removeEventListener("touchstop", this.keydownActions);
   }
 
   executeKeyCode = keyCode => {
@@ -132,8 +132,8 @@ class Game extends Component {
 
     window.addEventListener("keyup", this.keyupActions);
     window.addEventListener("keydown", this.keydownActions);
-    window.addEventListener("touchup", this.touchupActions);
-    window.addEventListener("touchdown", () => {
+    window.addEventListener("touchstart", this.touchupActions);
+    window.addEventListener("touchstop", () => {
       this.touchdownActions();
       this.touchingScreen = setInterval(this.touchdownActions, 50);
     });
