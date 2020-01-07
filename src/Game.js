@@ -493,7 +493,7 @@ class Game extends Component {
           <div id="mobile_key">
             <button
               id="mobileRotateHour"
-              onTouchStart={e => {
+              ontouchstart={e => {
                 this.key_pressed.push(
                   this.state.options.choosenKeys.rotateHour
                 );
@@ -501,7 +501,7 @@ class Game extends Component {
             ></button>
             <button
               id="mobileBottom"
-              onTouchStart={e => {
+              ontouchstart={e => {
                 this.key_pressed.push(this.state.options.choosenKeys.bottom);
               }}
             ></button>
