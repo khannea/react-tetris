@@ -44,11 +44,10 @@ class Game extends Component {
     window.removeEventListener("keyup", this.keyupActions);
     window.removeEventListener("keydown", this.keydownActions);
     window.removeEventListener("touchstart", this.keyupActions);
-    window.removeEventListener("touchstop", this.keydownActions);
+    window.removeEventListener("touchend", this.keydownActions);
   }
 
   executeKeyCode = keyCode => {
-    console.log("j'execute");
     switch (keyCode) {
       case this.state.options.choosenKeys["right"]:
         this.pieceMoveX(1);
@@ -163,13 +162,15 @@ class Game extends Component {
 
     window.removeEventListener("keyup", this.keyupActions);
     window.removeEventListener("keydown", this.keydownActions);
+    window.removeEventListener("touchstart", this.keyupActions);
+    window.removeEventListener("touchend", this.keydownActions);
   };
 
   //TIMER FONCTION
   launchTimer = () => {
-    // this.timer = setInterval(() => {
-    //   this.pieceMoveY(1);
-    // }, this.convertLvlToTime());
+    this.timer = setInterval(() => {
+      this.pieceMoveY(1);
+    }, this.convertLvlToTime());
   };
 
   convertLvlToTime = () => {
@@ -489,22 +490,24 @@ class Game extends Component {
           <Grid grid={this.state.grid} piece={this.state.piece} />
         )}
 
-        {/* <MobileView> */}
-        <div id="mobile_key">
-          <button
-            id="mobileRotateHour"
-            onTouchStart={e => {
-              this.key_pressed.push(this.state.options.choosenKeys.rotateHour);
-            }}
-          ></button>
-          <button
-            id="mobileBottom"
-            onTouchStart={e => {
-              this.key_pressed.push(this.state.options.choosenKeys.bottom);
-            }}
-          ></button>
-        </div>
-        {/* </MobileView> */}
+        <MobileView>
+          <div id="mobile_key">
+            <button
+              id="mobileRotateHour"
+              onTouchStart={e => {
+                this.key_pressed.push(
+                  this.state.options.choosenKeys.rotateHour
+                );
+              }}
+            ></button>
+            <button
+              id="mobileBottom"
+              onTouchStart={e => {
+                this.key_pressed.push(this.state.options.choosenKeys.bottom);
+              }}
+            ></button>
+          </div>
+        </MobileView>
       </div>
     );
   }
