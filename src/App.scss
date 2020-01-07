@@ -11,7 +11,7 @@ $smallCellWidth: 20px;
 $smallCellHeight: 20px;
 
 $uiFontSize: 40px;
-$smallUiFontSize: 30px;
+$smallUiFontSize: 20px;
 
 body {
   background: #18131d;
@@ -354,7 +354,7 @@ h1 {
 
   #next_piece_wrapper {
     position: absolute;
-    left: calc(100% + 20px);
+    left: calc(100% + 10px);
     top: 0px;
     width: 7 * $smallCellWidth;
     height: 4.5 * $smallCellHeight;
@@ -367,16 +367,16 @@ h1 {
       display: block;
       float: left;
       position: relative;
-      width: $smallCellWidth/2;
-      height: $smallCellHeight/2;
+      width: $smallCellWidth;
+      height: $smallCellHeight;
 
       &[class*="color"] {
         position: relative;
         &:before {
           content: "";
           position: absolute;
-          width: calc(#{$smallCellWidth}/ 2 + 5px);
-          height: calc(#{$smallCellHeight}/ 2 + 5px);
+          width: calc(#{$smallCellWidth} + 15px);
+          height: calc(#{$smallCellHeight} + 15px);
           left: 50%;
           top: 50%;
           transform: translateX(-50%) translateY(-50%);
