@@ -451,7 +451,7 @@ class Game extends Component {
   };
 
   addDataFromDb = data => {
-    fetch("http://localhost:4000/tetris_rank/add", {
+    fetch("/ap2/tetris_rank/add", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

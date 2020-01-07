@@ -10,7 +10,7 @@ class Rank extends Component {
   }
 
   getDataFromDb = () => {
-    const req = new Request("http://localhost:4000/tetris_rank/get", {
+    const req = new Request("/ap2/tetris_rank/get", {
       method: "GET",
       cache: "default"
     });
