@@ -354,7 +354,7 @@ h1 {
 
   #next_piece_wrapper {
     position: absolute;
-    left: calc(100% + 10px);
+    left: 20%;
     top: -4.5 * $smallCellHeight;
     width: 7 * $smallCellWidth;
     height: 4.5 * $smallCellHeight;
