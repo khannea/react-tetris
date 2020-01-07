@@ -232,7 +232,8 @@ button {
   #grid {
     position: relative;
     display: inline-block;
-    background: red;
+    background: $purple;
+    // background: red;
     &:before {
       content: "";
       position: absolute;

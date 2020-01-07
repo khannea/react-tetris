@@ -5,6 +5,14 @@ import NextPiece from "./NextPiece";
 import LevelAndLine from "./LevelAndLine";
 import TimeAndScore from "./TimeAndScore";
 import keyChoosen from "./keyChoosen";
+
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
+
 class Game extends Component {
   state = {
     grid: null,
@@ -442,6 +450,9 @@ class Game extends Component {
     }
     return (
       <div id="wrapper_grid">
+        <MobileView>
+          <h1> MOBMOBMOB MOBILE</h1>
+        </MobileView>
         <TimeAndScore
           time={this.toHHMMSS(this.globalTimer)}
           score={this.state.score}
