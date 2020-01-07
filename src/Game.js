@@ -501,9 +501,21 @@ class Game extends Component {
               }}
             ></button>
             <button
+              id="mobileLeft"
+              onTouchStart={e => {
+                this.key_pressed.push(this.state.options.choosenKeys.left);
+              }}
+            ></button>
+            <button
               id="mobileBottom"
               onTouchStart={e => {
                 this.key_pressed.push(this.state.options.choosenKeys.bottom);
+              }}
+            ></button>
+            <button
+              id="mobileRight"
+              onTouchStart={e => {
+                this.key_pressed.push(this.state.options.choosenKeys.right);
               }}
             ></button>
           </div>

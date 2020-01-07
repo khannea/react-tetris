@@ -49,23 +49,24 @@ h1 {
 #mobile_key {
   position: absolute;
   bottom: -20px;
-  left: 0;
-  width: 100%;
+  left: -25%;
+  width: 150%;
   transform: translateY(100%);
 
   button {
-    display: inline;
     border: 0;
     background: $lightpurple;
     font-weight: bold;
     width: 60px;
     height: 60px;
-    margin: auto 30px;
+    margin: 5px 10px;
     font-size: 30px;
-    box-shadow: 0 0 15px 5px #040205;
+    border: 1px solid $purple;
   }
   #mobileRotateHour {
+    display: block;
     position: relative;
+    margin: auto auto;
     &:before {
       content: "↻";
       color: $darkpurple;
@@ -78,10 +79,41 @@ h1 {
       transform: translateX(-50%) translateY(-50%);
     }
   }
+  #mobileLeft {
+    display: inline-block;
+    position: relative;
+    &:before {
+      content: "←";
+      color: $darkpurple;
+      position: absolute;
+      font-size: 60px;
+      width: 60px;
+      height: 60px;
+      left: 50%;
+      top: 25%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
   #mobileBottom {
+    display: inline-block;
     position: relative;
     &:before {
       content: "↓";
+      color: $darkpurple;
+      position: absolute;
+      font-size: 60px;
+      width: 60px;
+      height: 60px;
+      left: 50%;
+      top: 25%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+  #mobileRight {
+    display: inline-block;
+    position: relative;
+    &:before {
+      content: "→";
       color: $darkpurple;
       position: absolute;
       font-size: 60px;
@@ -362,7 +394,8 @@ h1 {
 
   #next_piece {
     position: relative;
-    left: 20%;
+    top: -8px;
+    left: 28%;
     span {
       display: block;
       float: left;
