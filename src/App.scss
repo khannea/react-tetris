@@ -15,7 +15,7 @@ $smallUiFontSize: 20px;
 
 body {
   background: #18131d;
-  min-width: 410px;
+  min-width: 400px;
 }
 
 h1 {
@@ -52,6 +52,7 @@ h1 {
   left: 0;
   width: 100%;
   transform: translateY(100%);
+  display: inline-block;
   button {
     border: 0;
     background: $lightpurple;
