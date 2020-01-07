@@ -25,7 +25,9 @@ class Game extends Component {
     lostGame: false,
     numberLine: 0,
     numberLineToLevelUp: 5,
-    options: null
+    options: null,
+    winner: null,
+    savedWinner: false
   };
 
   componentDidMount() {
@@ -122,7 +124,7 @@ class Game extends Component {
     this.globalTimer = 0;
     this.touchingScreen = false;
 
-    setInterval(() => {
+    this.globalTimerInterval = setInterval(() => {
       this.globalTimer++;
     }, 1000);
 
@@ -157,6 +159,7 @@ class Game extends Component {
 
   lostGame = () => {
     clearInterval(this.timer);
+    clearInterval(this.globalTimerInterval);
 
     this.setState({ lostGame: true });
 
@@ -447,11 +450,38 @@ class Game extends Component {
     return minutes + ":" + seconds;
   };
 
+  addDataFromDb = data => {
+    fetch("http://localhost:4000/tetris_rank/add", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(this.getDataFromDb);
+  };
+
+  handleWinnerUpdate = event => {
+    this.setState({ winner: event.target.value });
+  };
+
+  persistWinner = event => {
+    event.preventDefault();
+    const newEntry = {
+      name: this.state.winner,
+      score: this.state.score,
+      time: this.globalTimer
+    };
+    console.log(newEntry);
+    this.addDataFromDb(newEntry);
+    this.setState({ savedWinner: true });
+  };
+
   render() {
     if (this.state.lostGame) {
       return (
         <div id="wrapper_lost_game">
           <h1>GAME OVER</h1>
+
           <div className="ui-text">
             <span className="ui-text">Score : {this.state.score}</span>
           </div>
@@ -462,6 +492,22 @@ class Game extends Component {
             </span>
           </div>
 
+          <form className="highScoreInput" onSubmit={this.persistWinner}>
+            <p>
+              <label>
+                Winner name :
+                <input
+                  type="text"
+                  onChange={this.handleWinnerUpdate}
+                  value={this.state.winner}
+                />
+              </label>
+              {this.state.savedWinner === false && (
+                <button type="submit">Save</button>
+              )}
+            </p>
+          </form>
+
           <div className="wrapper_button">
             <button onClick={() => this.initGame()}>Play again</button>
             <button onClick={() => this.props.actions.launchMenu()}>
@@ -471,6 +517,7 @@ class Game extends Component {
         </div>
       );
     }
+
     return (
       <div id="wrapper_grid">
         <TimeAndScore
@@ -489,7 +536,12 @@ class Game extends Component {
         {this.state.grid !== null && (
           <Grid grid={this.state.grid} piece={this.state.piece} />
         )}
-
+        <button
+          className="quit_button"
+          onClick={() => this.props.actions.launchMenu()}
+        >
+          Quit
+        </button>
         <MobileView>
           <div id="mobile_key">
             <button

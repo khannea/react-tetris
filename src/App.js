@@ -3,6 +3,7 @@ import "./App.scss";
 import Menu from "./Menu";
 import Game from "./Game";
 import Options from "./Options";
+import Rank from "./Rank";
 
 class App extends Component {
   state = {
@@ -28,12 +29,20 @@ class App extends Component {
     });
   };
 
+  launchRank = () => {
+    this.setState({
+      componentToLoaded: Rank,
+      actions: { launchMenu: () => this.launchMenu() }
+    });
+  };
+
   launchMenu = () => {
     this.setState({
       componentToLoaded: Menu,
       actions: {
         launchGame: () => this.launchGame(),
-        launchOptions: () => this.launchOptions()
+        launchOptions: () => this.launchOptions(),
+        launchRank: () => this.launchRank()
       }
     });
   };

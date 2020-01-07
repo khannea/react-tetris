@@ -34,7 +34,9 @@ h1 {
   display: inline-block;
 }
 
-#menu button {
+#menu button,
+#options button,
+#rank button {
   background: $lightpurple;
   border: 0;
   color: $darkpurple;
@@ -299,6 +301,22 @@ h1 {
       }
     }
   }
+
+  .quit_button {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 0;
+    margin: auto auto;
+    background: $lightpurple;
+    font-weight: bold;
+    width: 60px;
+    height: 40px;
+    font-size: $smallUiFontSize;
+    border: 1px solid $purple;
+    color: $darkpurple;
+  }
 }
 
 @media screen and (max-width: 720px) {
@@ -419,4 +437,39 @@ h1 {
       }
     }
   }
+
+  .quit_button {
+    position: absolute;
+    right: -80px;
+    border: 0;
+    background: $lightpurple;
+    font-weight: bold;
+    width: 60px;
+    height: 40px;
+    font-size: $smallUiFontSize;
+    border: 1px solid $purple;
+    color: $darkpurple;
+  }
+}
+
+.rank_table {
+  width: 400px;
+  margin: 30px auto;
+  border-spacing: 10px;
+  display: table;
+  border: 1px solid white;
+  .rank_line {
+    display: table-row;
+
+    .rank_col {
+      padding: 10px;
+      display: table-cell;
+    }
+  }
+
+  font-family: "Oswald", sans-serif;
+  font-size: $smallUiFontSize;
+  font-weight: 500;
+  line-height: 1;
+  color: white;
 }
