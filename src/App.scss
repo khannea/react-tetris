@@ -7,8 +7,8 @@ $lightpurple: #7d7883;
 $cellWidth: 30px;
 $cellHeight: 30px;
 
-$smallCellWidth: 20px;
-$smallCellHeight: 20px;
+$smallCellWidth: 15px;
+$smallCellHeight: 15px;
 
 $uiFontSize: 40px;
 $smallUiFontSize: 30px;
@@ -48,7 +48,7 @@ h1 {
 
 #mobile_key {
   position: absolute;
-  bottom: -50px;
+  bottom: -20px;
   left: 0;
   width: 100%;
   transform: translateY(100%);
@@ -334,7 +334,7 @@ h1 {
 
   #level_and_line {
     position: absolute;
-    right: calc(100% + 20px);
+    right: calc(100% + 15px);
     bottom: 5px;
     span {
       text-align: right;
@@ -344,7 +344,7 @@ h1 {
 
   #time_and_score {
     position: absolute;
-    left: calc(100% + 20px);
+    left: calc(100% + 15px);
     bottom: 5px;
     span {
       text-align: left;
@@ -354,7 +354,7 @@ h1 {
 
   #next_piece_wrapper {
     position: absolute;
-    left: calc(100% + 20px);
+    left: calc(100% + 15px);
     top: 0px;
     width: 7 * $smallCellWidth;
     height: 4.5 * $smallCellHeight;
@@ -375,8 +375,8 @@ h1 {
         &:before {
           content: "";
           position: absolute;
-          width: calc(#{$smallCellWidth} + 15px);
-          height: calc(#{$smallCellHeight} + 15px);
+          width: calc(#{$smallCellWidth} + 10px);
+          height: calc(#{$smallCellHeight} + 10px);
           left: 50%;
           top: 50%;
           transform: translateX(-50%) translateY(-50%);
