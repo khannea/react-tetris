@@ -52,16 +52,15 @@ h1 {
   left: 0;
   width: 100%;
   transform: translateY(100%);
-  display: inline-block;
+
   button {
+    display: inline;
     border: 0;
     background: $lightpurple;
     font-weight: bold;
     width: 60px;
     height: 60px;
-    padding: 10px 0;
-    display: block;
-    margin: 0 auto 10px auto;
+    margin: auto 30px;
     font-size: 30px;
     box-shadow: 0 0 15px 5px #040205;
   }
