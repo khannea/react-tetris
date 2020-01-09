@@ -8,8 +8,8 @@ class Options extends Component {
         bottom: 40,
         left: 37,
         right: 39,
-        rotateHour: 88,
-        rotateAntiHour: 89
+        rotateHour: 68,
+        rotateAntiHour: 64
       }
     },
     keyPressed: false,
