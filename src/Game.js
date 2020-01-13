@@ -136,7 +136,7 @@ class Game extends Component {
 
     window.addEventListener("touchstart", () => {
       this.touchstartActions();
-      this.touchingScreen = setInterval(this.touchstartActions, 100);
+      this.touchingScreen = setInterval(this.touchstartActions, 300);
     });
     window.addEventListener("touchend", this.touchendActions);
 
